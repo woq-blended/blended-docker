@@ -1,6 +1,8 @@
+# We use alpine 3.9 for now. With 3.10 we do see strange errors when we use 
+# Selenium and Google Chrome for head less browser testing 
 FROM alpine:3.9
 
-MAINTAINER WoQ - Way of Quality GmbH - Blended 
+MAINTAINER WoQ - Way of Quality GmbH - Blended Team
 
 ENV USER=blended
 ENV UID=5000	
@@ -28,4 +30,3 @@ RUN addgroup -g "${GID}" "${USER}" \
   --uid "$UID" \
   "$USER" \
  && chown -R $USER:$GROUP /home/$USER
-
