@@ -9,7 +9,7 @@ zulu-8-alpine::
 Builds on `base-alpine` image and only adds a JDK-8 version of the
 https://www.azul.com/downloads/zulu/zulu-download-alpine[Zulu JDK for Alpine Linux].
 
-apacheds-alpine::
+link:apacheds-alpine/ReadMe.adoc[apacheds-alpine]::
 Builds on the `zulu-8-alpine` image and provides a preconfigured instance of an LDAP server based
 on the https://directory.apache.org/apacheds/[Apache Directory Service].
 

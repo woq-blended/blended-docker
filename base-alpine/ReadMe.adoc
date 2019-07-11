@@ -1,0 +1,7 @@
+== The blended alpine base image
+
+This image simply defines the base image on top of Alpine 3.9 and adds an user and a group.
+The user and the group can be used in other images to manage access to mounted directories.
+
+An example of such an usage is within the link:../build-alpine/ReadMe.adoc[build-alpine]
+image.

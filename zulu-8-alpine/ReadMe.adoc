@@ -1,0 +1,5 @@
+== The blended alpine zulu-8 image
+
+This image adds a the https://www.azul.com/downloads/zulu/zulu-download-alpine[Zulu JDK for Alpine]
+to the base image and adds it to the path for any bash based environment.
+
