@@ -1,6 +1,6 @@
 == The blended build image for Alpine
 
-This image build on top of link:../zulu-8-alpine/ReadMe.adoc[zulua-8-alpine] and adds the following tools:
+This image build on top of link:../zulu-8-alpine/ReadMe.adoc[zulu-8-alpine] and adds the following tools:
 
 https://www.scala-sbt.org/[sbt 1.2.8]::
 Required to execute any of the blended builds based on sbt.
