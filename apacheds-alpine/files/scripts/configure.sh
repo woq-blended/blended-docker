@@ -98,6 +98,8 @@ restartADS start $START_DELAY
 loadLdif $SYSTEM_PWD top_domain
 loadLdif $SYSTEM_PWD top_objects
 
+# change from here to modify the list of configured users and groups
+# tag::users[]
 addUser root "Main Admin" Administrator mysecret
 addUser andreas "Andreas Gies" Gies mysecret
 addUser tobias "Tobias Roeser" Roeser mysecret
@@ -107,5 +109,6 @@ addToGroup admins "uid=andreas,ou=users,o=blended"
 
 addGroup blended ""uid=blended,ou=users,o=blended""
 addToGroup blended "uid=andreas,ou=users,o=blended"
+# end::users[]
 
 ${APACHEDS_CMD} stop

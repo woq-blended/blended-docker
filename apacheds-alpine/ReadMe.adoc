@@ -1,0 +1,27 @@
+== Using the apacheds-alpine image
+
+This image contains a preconfigured instance of an Apache Directory Service. Within blended, this
+image is used only within inetgration tests whenever an integration needs to use authentication
+against an LDAP server.
+
+The `files/script` folder contains 2 files:
+
+link:files/scripts/configure.sh[`configure.sh`]::
+This script is used to set up the directory service with prepared content.
+
+link:files/scripts/run.sh[`run.sh`]::
+This script is used as an entrypoint into the docker image to start up the configured
+directory service instance.
+
+=== Using different logins and groups
+
+It is possible to change or enhance the configured users and groups by modifying the `configure.sh`
+script and rerun the docker build. Note, that the configuration takes place only at `docker build`
+while `docker run` simply starts the server.
+
+Below is the current configuration of users and groups
+
+[source,bash]
+----
+include::files/scripts/configure.sh[tags=users]
+----
