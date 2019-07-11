@@ -1,11 +1,11 @@
 This project contains a collection of useful docker images for https://github.com/woq-blended/blended[blended].
 All docker images are based on https://hub.docker.com/_/alpine[alpine:3.9] and build on top of each other:
 
-base-alpine::
+link:base-alpine/ReadMe.adoc[base-alpine]::
 This is the basic image for all other images and only references the base alpine image and defines a blended
 user and group.
 
-zulu-8-alpine::
+link:zulu-8-alpine/ReadMe.adoc[zulu-8-alpine]::
 Builds on `base-alpine` image and only adds a JDK-8 version of the
 https://www.azul.com/downloads/zulu/zulu-download-alpine[Zulu JDK for Alpine Linux].
 
@@ -13,6 +13,6 @@ link:apacheds-alpine/ReadMe.adoc[apacheds-alpine]::
 Builds on the `zulu-8-alpine` image and provides a preconfigured instance of an LDAP server based
 on the https://directory.apache.org/apacheds/[Apache Directory Service].
 
-build-alpine::
+link:build-alpine/ReadMe.adoc[build-alpine]::
 Builds on the `zulu-8-alpine` image and provides all build tools required to execute builds for one of the
 checked out blended projects.
