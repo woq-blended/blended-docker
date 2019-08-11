@@ -36,7 +36,7 @@ With the setup above, a build can be run with:
 ```
 docker run -u blended -it \
   -v $(pwd):/home/blended/project \
-  atooni/build-alpine:1.0 /bin/bash -l -c "cd ~/project ; sbt test"
+  atooni/build-alpine:1.0.1 /bin/bash -l -c "cd ~/project ; sbt test"
 ```
 
 In the command above `sbt test` is the sbt command to be executed for the project and can be replaced
@@ -51,7 +51,7 @@ can be exposed to the docker container as follows:
 docker run -u blended -it \
   -v $(pwd):/home/blended/project \
   -v /home/andreas/.ivy2:/home/blended/.ivy2 \
-  atooni/build-alpine:1.0 /bin/bash -l -c "cd ~/project ; sbt publishLocal"
+  atooni/build-alpine:1.0.1 /bin/bash -l -c "cd ~/project ; sbt publishLocal"
 ```
 
 Again, `~/.ivy2` must belong to `${GRPNAME}` and must have group write permissions. In the example above,

@@ -1,5 +1,5 @@
 # The basic image to run Blended containers
-FROM atooni/zulu-8-alpine:1.0
+FROM atooni/zulu-8-alpine:1.0.1
 
 MAINTAINER Andreas Gies 
 
@@ -24,5 +24,7 @@ RUN apk --no-cache add \
     nodejs \
     npm
 
-RUN npm install -g yarn xunit-viewer 
+RUN npm install --verbose -g yarn
+
+ # RUN npm install --verbose -g xunit-viewer
 

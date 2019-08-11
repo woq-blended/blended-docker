@@ -1,4 +1,4 @@
-FROM atooni/zulu-8-alpine:1.0
+FROM atooni/zulu-8-alpine:1.0.1
 MAINTAINER Blended Team
 
 ENV APACHEDS_VERSION 2.0.0.AM25

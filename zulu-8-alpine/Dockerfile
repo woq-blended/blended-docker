@@ -1,5 +1,5 @@
 # The basic image to run Blended containers
-FROM atooni/base-alpine:1.0
+FROM atooni/base-alpine:1.0.1
 
 MAINTAINER Andreas Gies 
 
