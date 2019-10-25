@@ -1,0 +1,39 @@
+== A simple Splunk enterprise setup
+
+This configuration is to set up a simple splunk server that can be used to capture
+the log output from the blended demo cointainers in splunk via a pre-configured
+HTTP event collector.
+
+As Splunk Enterprise has a commercial license, users must register themselves on the
+https://www.splunk.com/[Splunk web site] and download the trial version of Splunk Enterprise
+themselves. The configuration assumes that the linux tgz file will live in the `files` directory
+of the docker configuration directory.
+
+To create and run the image
+
+. Download the Splunk Enterprise trial version and accept the licensing terms to use the free
+trial version and store the tgz file in `files`.
+. Double check the file name of the downloaded tar file, so that it matches the tar file used
+in the docker image. At the time of this writing, the file is `splunk-8.0.0-1357bef0a7f6-Linux-x86_64.tgz`.
+. From within the docker configuration directory, execute `docker build -t <TAG> .`, where `<TAG>` is
+a tag name to identify the image on your local machine.
+. Finally, the docker image can be executed with `docker run -it p 8000:8000 -p 8088:8088 <TAG>`. This will execute splunk
+within the docker container and map the ports 8000 and 8088 to local ports.
+
+To send some test data to the event collector you can run
+```
+curl -k http://localhost:8088/services/collector -H 'Authorization: Splunk 7f4531c5-c92b-4f2f-b377-491e42c5c887' -d '{"sourcetype": "json", "event":"Hello, World!", "host":"127.0.0.1"}'
+```
+
+Afterwards, you can use the Splunk UI at `http:\\localhost:8000` to verify that the data has been captured correctly. The
+simple setup has a preconfigured user `admin` using the password `blendedsplunk`.
+
+=== Disclaimer
+
+This setup is a very simplistic setup of Splunk Enterprise with only one user and a pre-configured event collector.
+It does not use any sophisticated security mechanisms nor does it show how to set up Splunk in a production environment.
+The sole purpose of this image is to use it within an integration test scenario to verify that the log output of
+blended containers can be redirected to Splunk and explore the opportunities that evolve with doing so.
+
+Using the images requires you to download the Splunk software yourself and agree to the licensing terms for the
+download.
