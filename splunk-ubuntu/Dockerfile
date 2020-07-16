@@ -7,14 +7,14 @@ RUN groupadd -g 1500 splunk && useradd -d /opt/splunk -m -s /bin/bash -u 1500 -g
 RUN echo "splunk ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Installation section
-ADD files/splunk-8.0.0-1357bef0a7f6-Linux-x86_64.tgz /opt
-ADD files/etc /opt/splunk/etc
-ADD files/run.sh /opt/splunk/run.sh
-
-RUN chown -R splunk:splunk /opt/splunk && chmod u+x /opt/splunk/run.sh
-
 RUN apt-get update 
 RUN apt-get install -y vim net-tools
+
+ADD --chown=splunk:splunk files/splunk /opt/splunk
+ADD --chown=splunk:splunk files/etc /opt/splunk/etc
+ADD --chown=splunk:splunk files/run.sh /opt/splunk/run.sh
+
+RUN chmod +x /opt/splunk/run.sh
 
 EXPOSE 8000
 EXPOSE 8088
