@@ -2,7 +2,7 @@
 # Selenium and Google Chrome for head less browser testing
 FROM alpine:3.9
 
-MAINTAINER WoQ - Way of Quality GmbH - Blended Team
+LABEL maintainer="WoQ - Way of Quality GmbH - Blended Team"
 
 ENV USER=blended
 ENV UID=5000
