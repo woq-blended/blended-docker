@@ -3,23 +3,25 @@ FROM ubuntu:18.04
 
 LABEL Author="Andreas Gies"
 
-RUN groupadd -g 1500 splunk && useradd -d /opt/splunk -m -s /bin/bash -u 1500 -g splunk -G root splunk
+RUN groupadd -g 1500 splunk && useradd -d /opt/splunk -m -s /bin/bash -u 1500 -g root splunk
 RUN echo "splunk ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Installation section
 RUN apt-get update 
-RUN apt-get install --no-cache -y vim net-tools
+RUN apt-get install -y vim net-tools
 
-ADD --chown=splunk:splunk files/splunk /opt/splunk
-ADD --chown=splunk:splunk files/etc /opt/splunk/etc
-ADD --chown=splunk:splunk files/run.sh /opt/splunk/run.sh
+RUN chgrp -R 0 /opt/splunk && chown -R :root /opt/splunk && chmod g+srwX /opt/splunk 
 
-RUN chmod +x /opt/splunk/run.sh && chgrp -R 0 /opt/splunk && chmod -R g+rwX /opt/splunk
+ADD --chown=splunk:root files/splunk /opt/splunk
+ADD --chown=splunk:root files/etc /opt/splunk/etc
+ADD --chown=splunk:root files/run.sh /opt/splunk/run.sh
+
+RUN chmod +x /opt/splunk/run.sh 
 
 EXPOSE 8000
 EXPOSE 8088
 
-USER splunk:splunk
+USER splunk:root
 
 ENTRYPOINT /opt/splunk/run.sh
 
