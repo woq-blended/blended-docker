@@ -18,9 +18,8 @@ RUN apk --no-cache add \
     ca-certificates \
     bash
 
-RUN apk --no-cache add tar
-
-RUN mkdir -p /home/$USER
+RUN apk --no-cache add tar \
+ && mkdir -p /home/$USER
 
 RUN addgroup -g "${GID}" "${USER}" \
  && adduser \
@@ -31,4 +30,5 @@ RUN addgroup -g "${GID}" "${USER}" \
   --no-create-home \
   --uid "$UID" \
   "$USER" \
+ && adduser $USER root \
  && chown -R $USER:$GROUP /home/$USER

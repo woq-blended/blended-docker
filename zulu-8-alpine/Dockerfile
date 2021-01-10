@@ -1,10 +1,10 @@
 # The basic image to run Blended containers
-FROM atooni/base-alpine:1.0.1
+FROM blended/base-alpine:1.0.2
 
 LABEL maintainer="Blended Development Team"
 
-ENV JAVA_URL=https://cdn.azul.com/zulu/bin/zulu8.38.0.13-ca-jdk8.0.212-linux_musl_x64.tar.gz
-ENV SBT_URL=https://piccolo.link/sbt-1.2.8.tgz
+ENV JAVA_URL=https://cdn.azul.com/zulu/bin/zulu8.50.0.51-ca-jdk8.0.275-linux_musl_x64.tar.gz
+ENV SBT_URL=https://github.com/sbt/sbt/releases/download/v1.4.5/sbt-1.4.5.tgz
 
 # Installation section
 ADD files/profile.d /etc/profile.d
