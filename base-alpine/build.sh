@@ -1,2 +1,2 @@
 #!/bin/bash -l 
-docker build -t $(cat version.txt) .
+docker build -t blended/base-alpine:$(cat version.txt) .

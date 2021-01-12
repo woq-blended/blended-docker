@@ -1,18 +1,37 @@
-FROM atooni/zulu-8-alpine:1.0.1
+FROM blended/zulu-alpine:1.8.275
 MAINTAINER Blended Team
 
-ENV APACHEDS_VERSION 2.0.0.AM25
-ENV APACHEDS_URL http://archive.apache.org/dist/directory/apacheds/dist/${APACHEDS_VERSION}/apacheds-${APACHEDS_VERSION}.tar.gz
+ARG APACHEDS_NAME
+ENV USER_NAME=apacheds
 
-RUN apk --no-cache add openldap-clients gettext vim bash
+RUN apk --no-cache add openldap-clients gettext vim \
+ && addgroup "$USER_NAME" \
+ && adduser \
+  --disabled-password \
+  --gecos "" \
+  --home /home/"$USER_NAME" \
+  --ingroup "$USER_NAME" \
+  "$USER_NAME" \
+ && adduser $USER_NAME root 
 
-RUN curl ${APACHEDS_URL} | tar -xzC /opt \
- && ln -s $(ls -d /opt/apacheds*) /opt/apacheds
+RUN chown -R $USER_NAME:$GROUP /home/$USER_NAME \
+ && mkdir -p /opt/apacheds \
+ && chgrp -R 0 /opt/apacheds \
+ && chown -R :root /opt/apacheds \
+ && chmod -R g+srwX /opt/apacheds \
+ && chmod g+w /etc/passwd
 
-ADD files /opt/apacheds
+ENTRYPOINT [ "/usr/local/bin/uid.sh" ]
 
-RUN /bin/bash -l /opt/apacheds/scripts/configure.sh
+ADD --chown=apacheds:0 files/$APACHEDS_NAME /opt/apacheds
+ADD --chown=apacheds:0 files/ldif /opt/apacheds/ldif
+ADD --chown=apacheds:0 files/scripts /opt/apacheds/scripts
 
-ENTRYPOINT ["/bin/bash", "-l", "/opt/apacheds/scripts/run.sh" ]
+RUN /bin/bash -l /opt/apacheds/scripts/configure.sh \
+ && chmod +x /opt/apacheds/scripts/run.sh
+
 EXPOSE 10389
+
+USER 10101
+CMD ["/bin/bash", "-l", "/opt/apacheds/scripts/run.sh" ]
 

@@ -1,1 +1,1 @@
-blended/base-alpine:1.0.4
+3.12.1

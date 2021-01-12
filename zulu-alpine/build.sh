@@ -11,4 +11,4 @@ chgrp -R root $JRE_NAME
 chmod -R g+srwX $JRE_NAME
 cd ..
 
-docker build --build-arg JRE_NAME=$JRE_NAME -t blended/zulu-alpine/$(cat version.txt) .
+docker build --build-arg JRE_NAME=$JRE_NAME -t blended/zulu-alpine:$(cat version.txt) .

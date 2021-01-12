@@ -4,7 +4,7 @@ FROM alpine:3.12.1
 
 LABEL maintainer="WoQ - Way of Quality GmbH - Blended Team"
 
-ENV USER=blended
+ARG USER=blended
 
 # Installation section
 ADD files/profile.d /etc/profile.d
@@ -17,9 +17,9 @@ RUN apk --no-cache add \
     sudo \
     tar \
     bash \
- && mkdir -p /home/$USER/bin
+ && mkdir -p /usr/local/bin
 
-COPY files/bin /home/$USER/bin
+COPY files/bin /usr/local/bin
 
 #RUN addgroup "${USER}" \
 # && adduser \
@@ -32,5 +32,3 @@ COPY files/bin /home/$USER/bin
 # && adduser $USER root \
 # && chown -R $USER:$GROUP /home/$USER
 
-USER 10001
-ENTRYPOINT /home/$USER/bin/uid.sh
