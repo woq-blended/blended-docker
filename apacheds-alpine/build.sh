@@ -1,7 +1,7 @@
 #!/bin/bash 
 cd files
 
-APACHEDS_VERSION="2.0.0.AM25"
+APACHEDS_VERSION="2.0.0.AM26"
 APACHEDS_NAME="apacheds-${APACHEDS_VERSION}"
 
 umask 002
