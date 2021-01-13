@@ -1,5 +1,6 @@
 #!/bin/bash
 
-touch /var/log/vsftpd.log
+umask 002
+touch /opt/vsftp/vsftpd.log
 /usr/sbin/vsftpd
-tail -f /var/log/vsftpd.log
+tail -f /opt/vsftp/vsftpd.log

@@ -7,6 +7,7 @@ ENV USER_NAME=apacheds
 RUN apk --no-cache add openldap-clients gettext vim \
  && addgroup "$USER_NAME" \
  && adduser \
+  --uid 10101 \
   --disabled-password \
   --gecos "" \
   --home /home/"$USER_NAME" \
