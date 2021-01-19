@@ -2,27 +2,31 @@
 FROM ubuntu:18.04
 
 LABEL Author="Andreas Gies"
+ENV USER_NAME=splunk
 
-RUN groupadd -g 1500 splunk && useradd -d /opt/splunk -m -s /bin/bash -u 1500 -g root splunk
-RUN echo "splunk ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN groupadd splunk && useradd -d /opt/splunk -m -s /bin/bash -g root splunk
 
-# Installation section
-RUN apt-get update 
-RUN apt-get install -y vim net-tools
+RUN apt-get update \
+ && apt-get -y install vim net-tools 
 
-RUN chgrp -R 0 /opt/splunk && chown -R :root /opt/splunk && chmod g+srwX /opt/splunk 
+RUN chgrp -R 0 /opt/splunk \
+ && chgrp -R 0 /opt/splunk \
+ && chmod g=u /opt/splunk 
 
+ADD --chown=splunk:root files/bin/uid.sh /usr/local/bin/uid.sh
 ADD --chown=splunk:root files/splunk /opt/splunk
 ADD --chown=splunk:root files/etc /opt/splunk/etc
 ADD --chown=splunk:root files/run.sh /opt/splunk/run.sh
 
-RUN chmod +x /opt/splunk/run.sh 
+RUN chmod +x /opt/splunk/run.sh \
+ && chmod g+w /etc/passwd 
 
 EXPOSE 8000
 EXPOSE 8088
 
-USER splunk:root
+ENTRYPOINT [ "/usr/local/bin/uid.sh" ]
 
-ENTRYPOINT /opt/splunk/run.sh
+USER 10101
 
-# End of Installation section
+CMD /opt/splunk/run.sh
+
