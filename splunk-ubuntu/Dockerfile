@@ -10,12 +10,11 @@ RUN apt-get update \
  && apt-get -y install vim net-tools 
 
 RUN chgrp -R 0 /opt/splunk \
- && chgrp -R 0 /opt/splunk \
  && chmod g=u /opt/splunk 
 
 ADD --chown=splunk:root files/bin/uid.sh /usr/local/bin/uid.sh
-ADD --chown=splunk:root files/splunk /opt/splunk
-ADD --chown=splunk:root files/etc /opt/splunk/etc
+ADD --chown=splunk:root files/splunk /tmp/splunk
+ADD --chown=splunk:root files/etc /tmp/splunk/etc
 ADD --chown=splunk:root files/run.sh /opt/splunk/run.sh
 
 RUN chmod +x /opt/splunk/run.sh \
