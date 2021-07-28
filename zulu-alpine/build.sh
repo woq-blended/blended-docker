@@ -1,7 +1,7 @@
 #!/bin/bash 
 cd files
 
-JRE_NAME="zulu8.50.0.51-ca-jre8.0.275-linux_musl_x64"
+JRE_NAME="zulu11.50.19-ca-jre11.0.12-linux_musl_x64"
 
 umask 002
 wget -O "$JRE_NAME.tar.gz" 'https://cdn.azul.com/zulu/bin/'$JRE_NAME'.tar.gz'
